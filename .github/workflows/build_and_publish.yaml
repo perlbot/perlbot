@@ -23,7 +23,7 @@ jobs:
         name: Do checkout
       - name: Setup Perl environment
         run: |
-          echo PERL5LIB="$(pwd)/local/lib/perl5${PERL5LIB:+:PERL5LIB}" >> $GITHUB_ENV
+          echo PERL5LIB="$(pwd)/lib:$(pwd)/local/lib/perl5${PERL5LIB:+:PERL5LIB}" >> $GITHUB_ENV
           echo PERL_VERSION="$(perl -E 'print $^V')" >> $GITHUB_ENV
           cat .env >> $GITHUB_ENV
           echo "$(pwd)/local/bin" >> $GITHUB_PATH
@@ -46,11 +46,11 @@ jobs:
         run: |
           echo Detected pull request for pages, doing test build
           cd site/
-          statocles --lib --include local/lib/perl5 build
+          statocles build
       - name: Publish site
         if: github.event.name != "pull_request" && github.head_ref == "refs/heads/${{ env.SITE_BRANCH }}"
         run: |
           echo Running deploy job
           git stash -u
           cd site/
-          statocles --lib --include local/lib/perl5 deploy
+          statocles local/lib/perl5 deploy
