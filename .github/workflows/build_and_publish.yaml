@@ -50,7 +50,7 @@ jobs:
       - name: Publish site
         if: github.event.name != "pull_request" && github.head_ref == "refs/heads/${{ env.SITE_BRANCH }}"
         run: |
-          echo Running deploy job
+          echo Running deploy job ! ${{ github.event.name }} ! ${{ github.base_ref }} ! ${{ github.head_ref }} !
           git stash -u
           cd site/
-          statocles local/lib/perl5 deploy
+          statocles deploy
