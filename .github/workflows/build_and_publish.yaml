@@ -9,8 +9,6 @@ on:
     pull_request:
 
 jobs:
-  check-branches:
-    
   perl-job:
     runs-on: ['ubuntu-latest']
     container:
