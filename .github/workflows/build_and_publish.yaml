@@ -9,6 +9,8 @@ on:
     pull_request:
 
 jobs:
+  check-branches:
+    
   perl-job:
     runs-on: ['ubuntu-latest']
     container:
@@ -23,7 +25,7 @@ jobs:
         name: Do checkout
       - name: Setup Perl environment
         run: |
-          echo PERL5LIB="$(pwd)/lib:$(pwd)/local/lib/perl5${PERL5LIB:+:PERL5LIB}" >> $GITHUB_ENV
+          #          echo PERL5LIB="$(pwd)/lib:$(pwd)/local/lib/perl5${PERL5LIB:+:PERL5LIB}" >> $GITHUB_ENV
           echo PERL_VERSION="$(perl -E 'print $^V')" >> $GITHUB_ENV
           cat .env >> $GITHUB_ENV
           echo "$(pwd)/local/bin" >> $GITHUB_PATH
@@ -46,10 +48,11 @@ jobs:
         run: |
           echo Detected pull request for pages, doing test build
           cd site/
-          statocles --lib build
+          statocles --lib --include local/lib/perl5 build
       - name: Publish site
-        if: github.ref == "refs/heads/${{ env.SITE_BRANCH }}"
+        if: github.event.name != "pull_request" && github.head_ref == "refs/heads/${{ env.SITE_BRANCH }}"
         run: |
+          echo Running deploy job
           git stash -u
           cd site/
-          statocles --lib deploy
+          statocles --lib --include local/lib/perl5 deploy
