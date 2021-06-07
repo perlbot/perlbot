@@ -44,7 +44,7 @@ jobs:
       - name: Build site for PR
         if: github.event_name == 'pull_request'
         run: |
-          if [ "x${GITHUB_EVENT_NAME}" == "xpull_request" && "x${GITHUB__BASE_REF}" == "x${SITE_BRANCH}" ]]; then
+          if [ "x${GITHUB_EVENT_NAME}" == "xpull_request" && "x${GITHUB__BASE_REF}" == "x${SITE_BRANCH}" ]; then
             echo Running deploy job ! ${GITHUB_EVENT_NAME} ! ${GITHUB_REF} ! ${GITHUB_BASE_REF} !
             echo Detected pull request for pages, doing test build
             cd site/
@@ -56,7 +56,7 @@ jobs:
         if: github.event_name == 'push'
         run: |
           # fak it, just use some bash scripting
-          if [ "x${GITHUB_EVENT_NAME" == "push" && "x${GITHUB_REF}" == "x${SITE_BRANCH}" ]]; then
+          if [ "x${GITHUB_EVENT_NAME" == "push" && "x${GITHUB_REF}" == "x${SITE_BRANCH}" ]; then
             echo Running deploy job ! ${GITHUB_EVENT_NAME} ! ${GITHUB_REF} ! ${GITHUB_BASE_REF} !
             git stash -u
             cd site/
