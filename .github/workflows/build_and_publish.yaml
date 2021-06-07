@@ -6,7 +6,7 @@ on:
       - '*'
     tags-ignore:
       - '*'
-    pull_request:
+  pull_request:
 
 jobs:
   perl-job:
@@ -42,16 +42,16 @@ jobs:
           cpanm --notest --verbose Carton
           carton install
       - name: Build site for PR
-        if: github.event_name == "pull_request" && github.base_ref == "refs/heads/${{ env.SITE_BRANCH }}"
+        if: github.event_name == "pull_request" && 
         run: |
-          echo Running deploy job ! ${GITHUB_EVENT_NAME} ! ${GITHUB_HEAD_REF} ! ${GITHUB_BASE_REF} !
+          echo Running deploy job ! ${GITHUB_EVENT_NAME} ! ${GITHUB_REF} ! ${GITHUB_BASE_REF} !
           echo Detected pull request for pages, doing test build
           cd site/
           statocles build
       - name: Publish site
-        if: github.event_name != "pull_request" && github.head_ref == "refs/heads/${{ env.SITE_BRANCH }}"
+        if: github.event_name != "pull_request" && github.ref == "refs/heads/${{ env.SITE_BRANCH }}"
         run: |
-          echo Running deploy job ! ${GITHUB_EVENT_NAME} ! ${GITHUB_HEAD_REF} ! ${GITHUB_BASE_REF} !
+          echo Running deploy job ! ${GITHUB_EVENT_NAME} ! ${GITHUB_REF} ! ${GITHUB_BASE_REF} !
           git stash -u
           cd site/
           statocles deploy
