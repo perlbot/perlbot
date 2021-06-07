@@ -45,9 +45,9 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           chmod +x "${GITHUB_WORKSPACE}/.github/scripts/build.sh"
-          ${GITHUB_WORKSPACE/.github/scripts/build.sh
+          bash ${GITHUB_WORKSPACE}/.github/scripts/build.sh
       - name: Publish site
         if: github.event_name == 'push'
         run: |
           chmod +x "${GITHUB_WORKSPACE}/.github/scripts/publish.sh"
-          ${GITHUB_WORKSPACE/.github/scripts/publish.sh
+          bash ${GITHUB_WORKSPACE}/.github/scripts/publish.sh
