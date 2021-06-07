@@ -56,8 +56,8 @@ jobs:
         if: github.event_name == 'push'
         run: |
           # fak it, just use some bash scripting
-          if [ "x${GITHUB_EVENT_NAME" == "push" && "x${GITHUB_REF}" == "x${SITE_BRANCH}" ]; then
-            echo Running deploy job ! ${GITHUB_EVENT_NAME} ! ${GITHUB_REF} ! ${GITHUB_BASE_REF} !
+          if [ "x${GITHUB_EVENT_NAME}" == "push" && "x${GITHUB_REF}" == "x${SITE_BRANCH}" ]; then
+            echo Running deploy job . ${GITHUB_EVENT_NAME} . ${GITHUB_REF} . ${GITHUB_BASE_REF} .
             git stash -u
             cd site/
             statocles deploy
