@@ -44,23 +44,10 @@ jobs:
       - name: Build site for PR
         if: github.event_name == 'pull_request'
         run: |
-          if [ "x${GITHUB_EVENT_NAME}" == "xpull_request" -a "x${GITHUB_BASE_REF}" == "x${SITE_BRANCH}" ]; then
-            echo Running deploy job ! ${GITHUB_EVENT_NAME} ! ${GITHUB_REF} ! ${GITHUB_BASE_REF} !
-            echo Detected pull request for pages, doing test build
-            cd site/
-            statocles build
-          else
-            echo Not a pull request for website not testing builds
-          fi
+          chmod +x "${GITHUB_WORKSPACE}/.github/scripts/build.sh"
+          ${GITHUB_WORKSPACE/.github/scripts/build.sh
       - name: Publish site
         if: github.event_name == 'push'
         run: |
-          # fak it, just use some bash scripting
-          if [ "x${GITHUB_EVENT_NAME}" == "push" -a "x${GITHUB_REF}" == "x${SITE_BRANCH}" ]; then
-            echo Running deploy job . ${GITHUB_EVENT_NAME} . ${GITHUB_REF} . ${GITHUB_BASE_REF} .
-            git stash -u
-            cd site/
-            statocles deploy
-          else
-            echo Not a push to the site branch, not deploying
-          fi
+          chmod +x "${GITHUB_WORKSPACE}/.github/scripts/publish.sh"
+          ${GITHUB_WORKSPACE/.github/scripts/publish.sh
