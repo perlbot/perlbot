@@ -42,15 +42,14 @@ jobs:
           cpanm --notest --verbose Carton
           carton install
       - name: Build site for PR
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && github.base_ref == 'ref/heads/${{ env.site_branch }}'
         run: |
           echo Running deploy job ! ${GITHUB_EVENT_NAME} ! ${GITHUB_REF} ! ${GITHUB_BASE_REF} !
           echo Detected pull request for pages, doing test build
           cd site/
           statocles build
       - name: Publish site
-        if: github.event_name != 'pull_request'
-#          && github.ref == "refs/heads/${{ env.SITE_BRANCH }}"
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/${{ env.site_branch }}'
         run: |
           echo Running deploy job ! ${GITHUB_EVENT_NAME} ! ${GITHUB_REF} ! ${GITHUB_BASE_REF} !
           git stash -u
