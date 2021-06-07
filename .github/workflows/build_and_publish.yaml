@@ -42,16 +42,25 @@ jobs:
           cpanm --notest --verbose Carton
           carton install
       - name: Build site for PR
-        if: github.event_name == 'pull_request' && github.base_ref == 'ref/heads/${{ env.site_branch }}'
+        if: github.event_name == 'pull_request'
         run: |
-          echo Running deploy job ! ${GITHUB_EVENT_NAME} ! ${GITHUB_REF} ! ${GITHUB_BASE_REF} !
-          echo Detected pull request for pages, doing test build
-          cd site/
-          statocles build
+          if [[ $GITHUB_EVENT_NAME == "pull_request" && ${GITHUB__BASE_REF} == ${SITE_BRANCH} ]]; then
+            echo Running deploy job ! ${GITHUB_EVENT_NAME} ! ${GITHUB_REF} ! ${GITHUB_BASE_REF} !
+            echo Detected pull request for pages, doing test build
+            cd site/
+            statocles build
+          else
+            echo Not a pull request for website not testing builds
+          fi
       - name: Publish site
-        if: github.event_name == 'push' && github.ref == 'refs/heads/${{ env.site_branch }}'
+        if: github.event_name == 'push'
         run: |
-          echo Running deploy job ! ${GITHUB_EVENT_NAME} ! ${GITHUB_REF} ! ${GITHUB_BASE_REF} !
-          git stash -u
-          cd site/
-          statocles deploy
+          # fak it, just use some bash scripting
+          if [[ $GITHUB_EVENT_NAME == "push" && ${GITHUB_REF} == ${SITE_BRANCH} ]]; then
+            echo Running deploy job ! ${GITHUB_EVENT_NAME} ! ${GITHUB_REF} ! ${GITHUB_BASE_REF} !
+            git stash -u
+            cd site/
+            statocles deploy
+          else
+            echo Not a push to the site branch, not deploying
+          fi
