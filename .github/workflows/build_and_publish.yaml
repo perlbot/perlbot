@@ -1,12 +1,12 @@
 name: CD - Statocles
 
 on: 
+  pull_request:
   push:
     branches:
       - '*'
     tags-ignore:
       - '*'
-  pull_request:
 
 jobs:
   perl-job:
