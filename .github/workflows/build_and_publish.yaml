@@ -15,7 +15,7 @@ jobs:
       image: perl
     strategy:
       fail-fast: true
-    name: build and publish 
+    name: Statocles, build or publish.
     steps:
       - uses: actions/checkout@v2
         with:
