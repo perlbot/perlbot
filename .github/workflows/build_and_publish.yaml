@@ -42,7 +42,7 @@ jobs:
           cpanm --notest --verbose Carton
           carton install
       - name: Build site for PR
-        if: github.event_name == "pull_request" && 
+        if: github.event_name == "pull_request" 
         run: |
           echo Running deploy job ! ${GITHUB_EVENT_NAME} ! ${GITHUB_REF} ! ${GITHUB_BASE_REF} !
           echo Detected pull request for pages, doing test build
