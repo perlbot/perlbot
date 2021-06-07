@@ -49,7 +49,7 @@ jobs:
           cd site/
           statocles build
       - name: Publish site
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/${{ env.site_branch }}'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/${{ env.site_branch }}'
         run: |
           echo Running deploy job ! ${GITHUB_EVENT_NAME} ! ${GITHUB_REF} ! ${GITHUB_BASE_REF} !
           git stash -u
