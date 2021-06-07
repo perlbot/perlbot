@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ ${GITHUB_EVENT_NAME} == "push" && ${GITHUB_REF} == ${SITE_BRANCH} ]; then
-  echo Running deploy job . ${GITHUB_EVENT_NAME} . ${GITHUB_REF} . ${GITHUB_BASE_REF} .
+  echo Running deploy job
   git stash -u
   cd site/
   statocles deploy
