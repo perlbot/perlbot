@@ -4,7 +4,7 @@
         <loc>https://perlbot.github.io/</loc>
         <changefreq>weekly</changefreq>
         <priority>0.5</priority>
-        <lastmod>2021-06-07</lastmod>
+        <lastmod>2021-06-14</lastmod>
     </url>
     <url>
         <loc>https://perlbot.github.io/blog/</loc>
@@ -22,13 +22,13 @@
         <loc>https://perlbot.github.io/page/libera_bots.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.5</priority>
-        <lastmod>2021-06-07</lastmod>
+        <lastmod>2021-06-14</lastmod>
     </url>
     <url>
         <loc>https://perlbot.github.io/page/libera_project.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.5</priority>
-        <lastmod>2021-06-07</lastmod>
+        <lastmod>2021-06-14</lastmod>
     </url>
 </urlset>
 
