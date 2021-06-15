@@ -1,5 +1,0 @@
-Sitemap: https://perlbot.github.io/sitemap.xml
-User-Agent: *
-Disallow:
-
-
